@@ -1,9 +1,11 @@
 package com.PyrexNetwork.MySQL;
 
+import com.PyrexNetwork.Storage.StorageManager;
+
 import java.sql.*;
 import java.util.List;
 
-public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
+public class MySQLManager extends StorageManager {
     private String host;
     private String port;
     private String database;
@@ -23,7 +25,6 @@ public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
         return DriverManager.getConnection(url, username, password);
     }
 
-    @Override
     public int getTokenBalance(String playerUUID) {
         try (Connection connection = getConnection()) {
             String query = "SELECT tokens FROM koth_tokens WHERE player_uuid = ?";
@@ -41,7 +42,6 @@ public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
         return 0;
     }
 
-    @Override
     public void addTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
             String query = "UPDATE koth_tokens SET tokens = tokens + ? WHERE player_uuid = ?";
@@ -55,7 +55,6 @@ public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
         }
     }
 
-    @Override
     public void removeTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
             String query = "UPDATE koth_tokens SET tokens = tokens - ? WHERE player_uuid = ?";
@@ -69,7 +68,6 @@ public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
         }
     }
 
-    @Override
     public void setTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
             String query = "UPDATE koth_tokens SET tokens = ? WHERE player_uuid = ?";
@@ -83,7 +81,6 @@ public class MySQLManager implements com.PyrexNetwork.Storage.StorageManager {
         }
     }
 
-    @Override
     public List<String> getAllPlayers() {
         return List.of();
     }

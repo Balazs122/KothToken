@@ -1,13 +1,25 @@
 package com.PyrexNetwork.Storage;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-public interface StorageManager {
-    int getTokenBalance(String playerName);
-    void addTokens(String playerName, int amount);
-    void removeTokens(String playerName, int amount);
-    void setTokens(String playerName, int amount);
+public class StorageManager {
+    private final Map<UUID, Integer> tokenStorage = new HashMap<>();
 
-    // Add getAllPlayers method to StorageManager interface
-    List<String> getAllPlayers();  // This will be implemented in both FileManager and MySQLManager
+    public void addTokens(UUID playerUUID, int amount) {
+        tokenStorage.put(playerUUID, tokenStorage.getOrDefault(playerUUID, 0) + amount);
+    }
+
+    public void removeTokens(UUID playerUUID, int amount) {
+        tokenStorage.put(playerUUID, tokenStorage.getOrDefault(playerUUID, 0) - amount);
+    }
+
+    public void setTokens(UUID playerUUID, int amount) {
+        tokenStorage.put(playerUUID, amount);
+    }
+
+    public int getTokens(UUID playerUUID) {
+        return tokenStorage.getOrDefault(playerUUID, 0);
+    }
 }

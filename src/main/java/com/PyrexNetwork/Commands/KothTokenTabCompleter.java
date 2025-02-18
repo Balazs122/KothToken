@@ -1,27 +1,35 @@
 package com.PyrexNetwork.Commands;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class KothTokenTabCompleter implements TabCompleter {
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        List<String> suggestions = new ArrayList<>();
-
-        // If it's the first argument, show subcommands like balance, add, remove, etc.
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
-            suggestions.add("balance");
-            suggestions.add("add");
-            suggestions.add("remove");
-            suggestions.add("set");
-            suggestions.add("reload");
+            if (sender.hasPermission("kothtoken.admin.manage")) {
+                return Arrays.asList("add", "remove", "set", "balance", "reload");
+            } else {
+                return Arrays.asList("balance");
+            }
+        } else if (args.length == 2) {
+            String partialName = args[1].toLowerCase();
+            return Arrays.stream(Bukkit.getOfflinePlayers())
+                    .map(OfflinePlayer::getName)
+                    .filter(name -> name != null && name.toLowerCase().startsWith(partialName))
+                    .collect(Collectors.toList());
         }
-
-        return suggestions;
+        return new ArrayList<>();
     }
 }

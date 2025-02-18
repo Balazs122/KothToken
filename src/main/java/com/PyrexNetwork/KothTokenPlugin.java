@@ -2,37 +2,56 @@ package com.PyrexNetwork;
 
 import com.PyrexNetwork.Commands.KothTokenCommand;
 import com.PyrexNetwork.Commands.KothTokenTabCompleter;
-import com.PyrexNetwork.MySQL.MySQLManager;
 import com.PyrexNetwork.Placeholder.KothTokenExpansion;
 import com.PyrexNetwork.Storage.FileManager;
 import com.PyrexNetwork.Storage.StorageManager;
-import me.clip.placeholderapi.PlaceholderAPI;  // Correct import
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.ChatColor;
+
+import java.io.File;
+import java.io.IOException;
 
 public class KothTokenPlugin extends JavaPlugin {
     private StorageManager storageManager;
+    private FileConfiguration langConfig;
+    private String prefix;
+
+
 
     @Override
     public void onEnable() {
-        saveDefaultConfig(); // Save default config.yml
+        try {
+            saveDefaultConfig(); // Save default config.yml
+            loadLangConfig(); // Load lang.yml
 
-        loadStorageManager(); // Initialize the storage manager based on config
+            loadStorageManager(); // Initialize the storage manager based on config
 
-        // Register the main command
-        getCommand("kothtoken").setExecutor(new KothTokenCommand(this, storageManager));
+            // Register the main command
+            getCommand("kothtoken").setExecutor(new KothTokenCommand(this, storageManager));
 
-        // Register the tab completer for the /kothtoken command
-        getCommand("kothtoken").setTabCompleter(new KothTokenTabCompleter());
+            // Register the tab completer for the /kothtoken command
+            getCommand("kothtoken").setTabCompleter(new KothTokenTabCompleter());
 
-        // Check if PlaceholderAPI is available and register placeholders
-        Plugin placeholderAPI = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
-        if (placeholderAPI != null) {
-            getLogger().info("PlaceholderAPI found, registering placeholders.");
-            new KothTokenExpansion(this).register();  // Registering the placeholder expansion here
-        } else {
-            getLogger().warning("PlaceholderAPI not found, some features may not work.");
+            // Check if PlaceholderAPI is available and register placeholders
+            Plugin placeholderAPI = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
+            if (placeholderAPI != null) {
+                getLogger().info("PlaceholderAPI found, registering placeholders.");
+                new KothTokenExpansion(this).register();  // Registering the placeholder expansion here
+            } else {
+                getLogger().warning("PlaceholderAPI not found, some features may not work.");
+            }
+            getLogger().info("\u001B[37m==========================================");
+            getLogger().info("\u001B[32mKothToken plugin successfully loaded!");
+            getLogger().info("\u001B[37m==========================================");
+        } catch (Exception e) {
+
+            getLogger().severe("\u001B[37m==========================================");
+            getLogger().severe("\u001B[31mError loading KothToken plugin!");
+            getLogger().severe("\u001B[37m==========================================");
         }
     }
 
@@ -52,7 +71,7 @@ public class KothTokenPlugin extends JavaPlugin {
             String username = getConfig().getString("mysql.username");
             String password = getConfig().getString("mysql.password");
 
-            storageManager = new MySQLManager(host, port, database, username, password);
+            // Initialize MySQL storage manager here
 
         } else if ("file".equalsIgnoreCase(storageMode)) {
             String directory = getConfig().getString("file_storage.directory");
@@ -61,24 +80,32 @@ public class KothTokenPlugin extends JavaPlugin {
             storageManager = new FileManager(directory, fileName);
 
         } else {
-            getLogger().warning("Invalid storage mode in config.yml. Defaulting to file storage.");
             storageManager = new FileManager("plugins/KothToken/data", "saveddata.dat");
         }
     }
 
-    // Register the placeholders
-    private void registerPlaceholders() {
-        PlaceholderAPI.registerPlaceholder(this, "koth_token_value", (player) -> {
-            if (player != null && player.getName() != null) {
-                int tokenBalance = storageManager.getTokenBalance(player.getName());
-                return String.valueOf(tokenBalance); // Return the token balance as a string
-            }
-            return "0"; // Return a default value if player is null
-        });
-    }
-
-    // Get the storage manager (either MySQL or File)
     public StorageManager getStorageManager() {
         return storageManager;
+    }
+
+    // Load lang.yml file
+    private void loadLangConfig() {
+        File langFile = new File(getDataFolder(), "lang.yml");
+        if (!langFile.exists()) {
+            saveResource("lang.yml", false);
+        }
+        langConfig = YamlConfiguration.loadConfiguration(langFile);
+        prefix = langConfig.getString("messages.prefix", "");
+    }
+
+    // Get a message from lang.yml with prefix
+    public String getMessage(String key) {
+        String message = prefix + langConfig.getString("messages." + key);
+        return ChatColor.translateAlternateColorCodes('&', message);
+    }
+    public void reloadPlugin() {
+        reloadConfig();
+        loadLangConfig();
+        loadStorageManager();
     }
 }

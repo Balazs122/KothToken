@@ -1,0 +1,12 @@
+messages:
+  no_permission: "&cYou do not have permission to use this command."
+  usage: "&eUsage: /kothtoken <command>"
+  reload_success: "&aKothToken plugin reloaded successfully."
+  specify_player: "&ePlease specify a player."
+  never_online: "&cThis player has never been online."
+  amount_must_be_number: "&cThe amount must be a number."
+  added_tokens: "&aAdded {amount} tokens to {player}."
+  removed_tokens: "&cRemoved {amount} tokens from {player}."
+  set_tokens: "&eSet {player}'s tokens to {amount}."
+  unknown_action: "&cUnknown action: {action}."
+  balance: "&e{player} has {balance} tokens."

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileManager implements StorageManager {
+public class FileManager extends StorageManager {
 
     private final File dataFile;
     private final YamlConfiguration dataConfig;
@@ -32,26 +32,22 @@ public class FileManager implements StorageManager {
         }
     }
 
-    @Override
     public int getTokenBalance(String playerName) {
         return dataConfig.getInt(playerName + ".tokens", 0);
     }
 
-    @Override
     public void addTokens(String playerName, int amount) {
         int currentBalance = getTokenBalance(playerName);
         dataConfig.set(playerName + ".tokens", currentBalance + amount);
         saveData();
     }
 
-    @Override
     public void removeTokens(String playerName, int amount) {
         int currentBalance = getTokenBalance(playerName);
         dataConfig.set(playerName + ".tokens", Math.max(0, currentBalance - amount)); // Prevent negative balance
         saveData();
     }
 
-    @Override
     public void setTokens(String playerName, int amount) {
         dataConfig.set(playerName + ".tokens", amount);
         saveData();

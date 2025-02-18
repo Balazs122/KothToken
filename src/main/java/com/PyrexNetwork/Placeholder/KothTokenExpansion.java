@@ -20,7 +20,7 @@ public class KothTokenExpansion extends PlaceholderExpansion {
 
         // Only handle the "koth_token_value" placeholder
         if (identifier.equals("koth_token_value")) {
-            int tokenBalance = plugin.getStorageManager().getTokenBalance(player.getName());
+            int tokenBalance = plugin.getStorageManager().getTokens(player.getUniqueId());
             return String.valueOf(tokenBalance); // Return token balance
         }
 
