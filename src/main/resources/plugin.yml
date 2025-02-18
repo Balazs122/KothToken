@@ -1,8 +1,13 @@
 name: KothToken
-version: '1.0-SNAPSHOT'
-main: com.PyrexNetwork.kothToken.KothToken
+version: '0.1-01 Alpha Build'
+main: com.PyrexNetwork.KothTokenPlugin
+depend: ["PlaceholderAPI"] #
 api-version: '1.18'
 load: STARTUP
 authors: [ Baluka01121 ]
-description: A Custom plugin for PyrexNetwork
+description: A Custom plugin for com.PyrexNetwork
 website: play.pyrexnetwork.hu
+commands:
+  kothtoken:
+    description: Koth token command
+    usage: /kothtoken <balance | add | remove | set>
