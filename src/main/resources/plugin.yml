@@ -1,0 +1,8 @@
+name: KothToken
+version: '1.0-SNAPSHOT'
+main: com.PyrexNetwork.kothToken.KothToken
+api-version: '1.18'
+load: STARTUP
+authors: [ Baluka01121 ]
+description: A Custom plugin for PyrexNetwork
+website: play.pyrexnetwork.hu
