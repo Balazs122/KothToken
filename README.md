@@ -1,3 +1,7 @@
+https://cdn.discordapp.com/attachments/1206908041912385536/1341829430582055054/image.png?ex=67b76b8a&is=67b61a0a&hm=85652963c49f80fd4f77546f18d10d941c9b9cacd66c5dcd6c9d49a33f5524e2&
+
+
+
 # KothToken 🔥  
 A **fully open-source** and **free** Minecraft plugin that introduces a **token-based currency system**, perfect for in-game shops, rewards, and events.  
 
