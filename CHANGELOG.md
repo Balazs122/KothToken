@@ -7,9 +7,9 @@
 ### ✨ New Features:
 
 - ⭐ **Detailed Help Command** - Now provides structured command guidance.
-- ⭐ **New Help Menu** (********`/kothtoken help`********\*\*\*\*)** - A revamped help menu for easier navigation.
-- ⭐ **Version Command (********`/kothtoken version`********\*\*\*\*)** - Displays the current plugin version.
-- ⭐ **Reload Command (********`/kothtoken reload`********\*\*\*\*)** - Reloads the configuration without restarting the server.
+- ⭐ **New Help Menu** (********`/kothtoken help`****\*\*\*\*) - A revamped help menu for easier navigation.
+- ⭐ **Version Command (********`/kothtoken version`****\*\*\*\*)** - Displays the current plugin version.
+- ⭐ **Reload Command (********`/kothtoken reload`****\*\*\*\*)** - Reloads the configuration without restarting the server.
 
 ### 🛠 Improvements:
 
