@@ -19,9 +19,9 @@ public class KothTokenTabCompleter implements TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
             if (sender.hasPermission("kothtoken.admin.manage")) {
-                return Arrays.asList("add", "remove", "set", "balance", "reload");
+                return Arrays.asList("add", "remove", "set", "balance", "reload", "help", "version");
             } else {
-                return Arrays.asList("balance");
+                return Arrays.asList("balance", "help", "version");
             }
         } else if (args.length == 2) {
             String partialName = args[1].toLowerCase();

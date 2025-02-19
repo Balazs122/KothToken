@@ -1,12 +1,20 @@
 name: KothToken
-version: '0.1-01 Alpha Build'
+version: v1.2-0
 main: com.PyrexNetwork.KothTokenPlugin
-depend: ["PlaceholderAPI"] #
-api-version: '1.18'
-load: STARTUP
-authors: [ Baluka01121 ]
-description: A Custom plugin for com.PyrexNetwork
-website: play.pyrexnetwork.hu
+api-version: 1.18
 commands:
   kothtoken:
-    description: Koth token command
+    description: Main command for KothToken plugin
+    usage: /kothtoken <subcommand>
+    permission: kothtoken.use
+    aliases: [kt]
+permissions:
+  kothtoken.use:
+    description: Allows the use of the KothToken command
+    default: true
+  kothtoken.admin.reload:
+    description: Allows reloading the KothToken plugin
+    default: op
+  kothtoken.admin.manage:
+    description: Allows managing tokens of other players
+    default: op

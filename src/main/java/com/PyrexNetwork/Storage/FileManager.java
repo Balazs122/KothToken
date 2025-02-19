@@ -1,23 +1,22 @@
 package com.PyrexNetwork.Storage;
 
-import com.PyrexNetwork.KothTokenPlugin;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class FileManager extends StorageManager {
-
     private final File dataFile;
-    private final YamlConfiguration dataConfig;
+    private final FileConfiguration dataConfig;
 
-    // Constructor for FileManager
     public FileManager(String directory, String fileName) {
-        File pluginDir = new File(KothTokenPlugin.getPlugin(KothTokenPlugin.class).getDataFolder(), directory);
+        File pluginDir = new File(directory);
         if (!pluginDir.exists()) {
-            pluginDir.mkdirs(); // Create directory if it doesn't exist
+            pluginDir.mkdirs();
         }
         this.dataFile = new File(pluginDir, fileName);
         this.dataConfig = YamlConfiguration.loadConfiguration(dataFile);
@@ -25,32 +24,36 @@ public class FileManager extends StorageManager {
         // Ensure the data file exists, create it if not
         if (!dataFile.exists()) {
             try {
-                dataFile.createNewFile(); // Create the file if it does not exist
+                dataFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public int getTokenBalance(String playerName) {
-        return dataConfig.getInt(playerName + ".tokens", 0);
-    }
-
-    public void addTokens(String playerName, int amount) {
+    @Override
+    public void addTokens(UUID playerUUID, int amount) {
+        String playerName = playerUUID.toString();
         int currentBalance = getTokenBalance(playerName);
         dataConfig.set(playerName + ".tokens", currentBalance + amount);
         saveData();
     }
 
-    public void removeTokens(String playerName, int amount) {
-        int currentBalance = getTokenBalance(playerName);
-        dataConfig.set(playerName + ".tokens", Math.max(0, currentBalance - amount)); // Prevent negative balance
+    @Override
+    public void setTokens(UUID playerUUID, int amount) {
+        String playerName = playerUUID.toString();
+        dataConfig.set(playerName + ".tokens", amount);
         saveData();
     }
 
-    public void setTokens(String playerName, int amount) {
-        dataConfig.set(playerName + ".tokens", amount);
-        saveData();
+    @Override
+    public int getTokens(UUID playerUUID) {
+        String playerName = playerUUID.toString();
+        return getTokenBalance(playerName);
+    }
+
+    private int getTokenBalance(String playerName) {
+        return dataConfig.getInt(playerName + ".tokens", 0);
     }
 
     private void saveData() {

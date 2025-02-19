@@ -1,6 +1,9 @@
 messages:
+  prefix: "&8[&cKothToken&8] "
+  version: "&fCurrent version: &a{version}"
+  help: "&8=======&c&lKothToken&8=======\n&7&o/kothtoken help &6- &fShows the help menu.\n&7&o/kothtoken balance &6– &fShows the players balance.\n&7&o/kothtoken version &6- &fShows the version you are using.\n&8=========&c&lAdmin&8==========\n&7&o/kothtoken add &f[&aName&f] &f[&aAmount&f] &6- &fAdds a specific amount of token to a player.\n&7&o/kothtoken set &f[&aName&f] &f[&aAmount&f] &6- &fSet the amount of tokens of a specific player.\n&7&o/kothtoken remove &f[&aName&f] &f[&aAmount&f] &6- &fRemoves a specific amount of tokens from a player.\n&7&o/kothtoken reload &6- &fReloads the plugin.\n&8========================"
   no_permission: "&cYou do not have permission to use this command."
-  usage: "&eUsage: /kothtoken <command>"
+  usage: "&eUsage: /kothtoken (version | help | balance )"
   reload_success: "&aKothToken plugin reloaded successfully."
   specify_player: "&ePlease specify a player."
   never_online: "&cThis player has never been online."
@@ -10,3 +13,4 @@ messages:
   set_tokens: "&eSet {player}'s tokens to {amount}."
   unknown_action: "&cUnknown action: {action}."
   balance: "&e{player} has {balance} tokens."
+  balance_cannot_be_below_zero: "&cThe balance cannot be below 0."

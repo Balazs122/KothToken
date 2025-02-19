@@ -20,8 +20,6 @@ public class KothTokenPlugin extends JavaPlugin {
     private FileConfiguration langConfig;
     private String prefix;
 
-
-
     @Override
     public void onEnable() {
         try {
@@ -48,9 +46,9 @@ public class KothTokenPlugin extends JavaPlugin {
             getLogger().info("\u001B[32mKothToken plugin successfully loaded!");
             getLogger().info("\u001B[37m==========================================");
         } catch (Exception e) {
-
             getLogger().severe("\u001B[37m==========================================");
             getLogger().severe("\u001B[31mError loading KothToken plugin!");
+            getLogger().severe(e.getMessage());
             getLogger().severe("\u001B[37m==========================================");
         }
     }
@@ -62,25 +60,30 @@ public class KothTokenPlugin extends JavaPlugin {
 
     // Method to load or reload the storage manager based on the config
     public void loadStorageManager() {
-        String storageMode = getConfig().getString("storage_mode");
+        try {
+            String storageMode = getConfig().getString("storage_mode");
+            getLogger().info("Storage mode: " + storageMode);
 
-        if ("mysql".equalsIgnoreCase(storageMode)) {
-            String host = getConfig().getString("mysql.host");
-            String port = getConfig().getString("mysql.port");
-            String database = getConfig().getString("mysql.database");
-            String username = getConfig().getString("mysql.username");
-            String password = getConfig().getString("mysql.password");
+            if ("mysql".equalsIgnoreCase(storageMode)) {
+                String host = getConfig().getString("mysql.host");
+                String port = getConfig().getString("mysql.port");
+                String database = getConfig().getString("mysql.database");
+                String username = getConfig().getString("mysql.username");
+                String password = getConfig().getString("mysql.password");
 
-            // Initialize MySQL storage manager here
+                // Initialize MySQL storage manager here
 
-        } else if ("file".equalsIgnoreCase(storageMode)) {
-            String directory = getConfig().getString("file_storage.directory");
-            String fileName = getConfig().getString("file_storage.file_name");
+            } else {
+                String directory = getDataFolder() + File.separator + "data" + File.separator + "saveddata";
+                String fileName = "saveddata.dat";
 
-            storageManager = new FileManager(directory, fileName);
+                getLogger().info("File storage configuration - Directory: " + directory + ", File name: " + fileName);
 
-        } else {
-            storageManager = new FileManager("plugins/KothToken/data", "saveddata.dat");
+                storageManager = new FileManager(directory, fileName);
+            }
+        } catch (Exception e) {
+            getLogger().severe("Error loading storage manager: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -88,24 +91,47 @@ public class KothTokenPlugin extends JavaPlugin {
         return storageManager;
     }
 
-    // Load lang.yml file
+    // Load lang.yml file directly
     private void loadLangConfig() {
-        File langFile = new File(getDataFolder(), "lang.yml");
-        if (!langFile.exists()) {
-            saveResource("lang.yml", false);
+        try {
+            File langFile = new File(getDataFolder(), "lang.yml");
+            if (!langFile.exists()) {
+                saveResource("lang.yml", false);
+            }
+            langConfig = YamlConfiguration.loadConfiguration(langFile);
+            prefix = langConfig.getString("messages.prefix", "");
+        } catch (Exception e) {
+            getLogger().severe("Error loading language configuration: " + e.getMessage());
         }
-        langConfig = YamlConfiguration.loadConfiguration(langFile);
-        prefix = langConfig.getString("messages.prefix", "");
     }
 
     // Get a message from lang.yml with prefix
     public String getMessage(String key) {
+        if (langConfig == null) {
+            getLogger().severe("Language configuration is not loaded.");
+            return ChatColor.RED + "Error: Language configuration not loaded.";
+        }
         String message = prefix + langConfig.getString("messages." + key);
         return ChatColor.translateAlternateColorCodes('&', message);
     }
+
+    // Get a raw message from lang.yml without prefix
+    public String getRawMessage(String key) {
+        if (langConfig == null) {
+            getLogger().severe("Language configuration is not loaded.");
+            return ChatColor.RED + "Error: Language configuration not loaded.";
+        }
+        String message = langConfig.getString("messages." + key);
+        return ChatColor.translateAlternateColorCodes('&', message);
+    }
+
     public void reloadPlugin() {
-        reloadConfig();
-        loadLangConfig();
-        loadStorageManager();
+        try {
+            reloadConfig();
+            loadLangConfig();
+            loadStorageManager();
+        } catch (Exception e) {
+            getLogger().severe("Error reloading plugin: " + e.getMessage());
+        }
     }
 }
