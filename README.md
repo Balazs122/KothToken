@@ -14,7 +14,7 @@ A **fully open-source** and **free** Minecraft plugin that introduces a **token-
 ---
 
 ## 📥 Installation  
-1. **Download the latest release** from the [Releases](https://github.com/YourGitHub/KothToken/releases) page.  
+1. **Download the latest release** from the [Releases](https://github.com/Balazs122/KothToken/releases) page.  
 2. **Drop the `.jar` file** into your `plugins` folder.  
 3. **Start your server** to generate the `config.yml` file.  
 4. **Configure your storage mode** (File or MySQL) in `config.yml`.  
