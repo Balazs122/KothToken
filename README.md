@@ -43,7 +43,7 @@ A **fully open-source** and **free** Minecraft plugin that introduces a **token-
 ---
 
 ## 🛠️ Changelog  
-Check out the full **[changelog here](https://github.com/Balazs112/KothToken/CHANGELOG.md)** for recent updates, bug fixes, and upcoming features!  
+Check out the full **[changelog here](https://github.com/Balazs122/KothToken/CHANGELOG.md)** for recent updates, bug fixes, and upcoming features!  
 
 ---
 
