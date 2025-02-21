@@ -2,13 +2,13 @@ package com.PyrexNetwork.Placeholder;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
-import com.PyrexNetwork.KothTokenPlugin;
+import com.PyrexNetwork.PyrexTokenPlugin;
 
-public class KothTokenExpansion extends PlaceholderExpansion {
+public class PyrexTokenExpansion extends PlaceholderExpansion {
 
-    private final KothTokenPlugin plugin;
+    private final PyrexTokenPlugin plugin;
 
-    public KothTokenExpansion(KothTokenPlugin plugin) {
+    public PyrexTokenExpansion(PyrexTokenPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -18,8 +18,8 @@ public class KothTokenExpansion extends PlaceholderExpansion {
             return "0"; // Return 0 if player is null
         }
 
-        // Only handle the "koth_token_value" placeholder
-        if (identifier.equals("koth_token_value")) {
+        // Only handle the "token_value" placeholder
+        if (identifier.equals("token_value")) {
             int tokenBalance = plugin.getStorageManager().getTokens(player.getUniqueId());
             return String.valueOf(tokenBalance); // Return token balance
         }
@@ -29,7 +29,7 @@ public class KothTokenExpansion extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "kothtoken"; // The identifier for placeholders (e.g., %kothtoken_koth_token_value%)
+        return "pyrextoken"; // The identifier for placeholders (e.g., %pyrextoken_token_value%)
     }
 
     @Override

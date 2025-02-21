@@ -1,20 +1,21 @@
-name: KothToken
-version: v1.2-0
-main: com.PyrexNetwork.KothTokenPlugin
+name: PyrexTokens
+main: com.PyrexNetwork.PyrexTokenPlugin
+version: v1.2-5
 api-version: 1.18
 commands:
-  kothtoken:
-    description: Main command for KothToken plugin
-    usage: /kothtoken <subcommand>
-    permission: kothtoken.use
-    aliases: [kt]
+  pyrextoken:
+    description: Main command for PyrexTokens
+    usage: /<command>
+    permission: pyrextoken.use
+    permission-message: You do not have permission to use this command.
+    aliases: [pt, ptoken, pyrext]
 permissions:
-  kothtoken.use:
+  pyrextoken.use:
     description: Allows the use of the KothToken command
     default: true
-  kothtoken.admin.reload:
+  pyrextoken.admin.reload:
     description: Allows reloading the KothToken plugin
     default: op
-  kothtoken.admin.manage:
+  pyrextoken.admin.manage:
     description: Allows managing tokens of other players
     default: op

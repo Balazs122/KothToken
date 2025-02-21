@@ -1,7 +1,7 @@
 package com.PyrexNetwork.Commands;
 
 import com.PyrexNetwork.Storage.StorageManager;
-import com.PyrexNetwork.KothTokenPlugin;
+import com.PyrexNetwork.PyrexTokenPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -10,11 +10,11 @@ import org.bukkit.command.CommandSender;
 
 import java.util.UUID;
 
-public class KothTokenCommand implements CommandExecutor {
-    private final KothTokenPlugin plugin;
+public class PyrexTokenCommand implements CommandExecutor {
+    private final PyrexTokenPlugin plugin;
     private final StorageManager storageManager;
 
-    public KothTokenCommand(KothTokenPlugin plugin, StorageManager storageManager) {
+    public PyrexTokenCommand(PyrexTokenPlugin plugin, StorageManager storageManager) {
         this.plugin = plugin;
         this.storageManager = storageManager;
     }

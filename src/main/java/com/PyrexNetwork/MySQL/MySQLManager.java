@@ -27,7 +27,7 @@ public class MySQLManager extends StorageManager {
 
     public int getTokenBalance(String playerUUID) {
         try (Connection connection = getConnection()) {
-            String query = "SELECT tokens FROM koth_tokens WHERE player_uuid = ?";
+            String query = "SELECT tokens FROM pyrex_tokens WHERE player_uuid = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 stmt.setString(1, playerUUID);
                 try (ResultSet resultSet = stmt.executeQuery()) {
@@ -44,7 +44,7 @@ public class MySQLManager extends StorageManager {
 
     public void addTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
-            String query = "UPDATE koth_tokens SET tokens = tokens + ? WHERE player_uuid = ?";
+            String query = "UPDATE pyrex_tokens SET tokens = tokens + ? WHERE player_uuid = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 stmt.setInt(1, amount);
                 stmt.setString(2, playerUUID);
@@ -57,7 +57,7 @@ public class MySQLManager extends StorageManager {
 
     public void removeTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
-            String query = "UPDATE koth_tokens SET tokens = tokens - ? WHERE player_uuid = ?";
+            String query = "UPDATE pyrex_tokens SET tokens = tokens - ? WHERE player_uuid = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 stmt.setInt(1, amount);
                 stmt.setString(2, playerUUID);
@@ -70,7 +70,7 @@ public class MySQLManager extends StorageManager {
 
     public void setTokens(String playerUUID, int amount) {
         try (Connection connection = getConnection()) {
-            String query = "UPDATE koth_tokens SET tokens = ? WHERE player_uuid = ?";
+            String query = "UPDATE pyrex_tokens SET tokens = ? WHERE player_uuid = ?";
             try (PreparedStatement stmt = connection.prepareStatement(query)) {
                 stmt.setInt(1, amount);
                 stmt.setString(2, playerUUID);

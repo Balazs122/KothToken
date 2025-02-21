@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.PyrexNetwork</groupId>
-    <artifactId>KothToken</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>PyrexToken</artifactId>
+    <version>v1.2-5</version>
     <packaging>jar</packaging>
 
-    <name>KothToken</name>
+    <name>PyrexToken</name>
 
     <properties>
         <java.version>17</java.version>

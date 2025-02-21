@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class KothTokenTabCompleter implements TabCompleter {
+public class PyrexTokenTabCompleter implements TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 1) {
-            if (sender.hasPermission("kothtoken.admin.manage")) {
+            if (sender.hasPermission("pyrextoken.admin.manage")) {
                 return Arrays.asList("add", "remove", "set", "balance", "reload", "help", "version");
             } else {
                 return Arrays.asList("balance", "help", "version");

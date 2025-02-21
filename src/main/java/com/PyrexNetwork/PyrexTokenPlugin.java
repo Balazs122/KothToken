@@ -1,8 +1,8 @@
 package com.PyrexNetwork;
 
-import com.PyrexNetwork.Commands.KothTokenCommand;
-import com.PyrexNetwork.Commands.KothTokenTabCompleter;
-import com.PyrexNetwork.Placeholder.KothTokenExpansion;
+import com.PyrexNetwork.Commands.PyrexTokenCommand;
+import com.PyrexNetwork.Commands.PyrexTokenTabCompleter;
+import com.PyrexNetwork.Placeholder.PyrexTokenExpansion;
 import com.PyrexNetwork.Storage.FileManager;
 import com.PyrexNetwork.Storage.StorageManager;
 import org.bukkit.Bukkit;
@@ -13,9 +13,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.ChatColor;
 
 import java.io.File;
-import java.io.IOException;
 
-public class KothTokenPlugin extends JavaPlugin {
+public class PyrexTokenPlugin extends JavaPlugin {
     private StorageManager storageManager;
     private FileConfiguration langConfig;
     private String prefix;
@@ -29,25 +28,25 @@ public class KothTokenPlugin extends JavaPlugin {
             loadStorageManager(); // Initialize the storage manager based on config
 
             // Register the main command
-            getCommand("kothtoken").setExecutor(new KothTokenCommand(this, storageManager));
+            getCommand("pyrextoken").setExecutor(new PyrexTokenCommand(this, storageManager));
 
-            // Register the tab completer for the /kothtoken command
-            getCommand("kothtoken").setTabCompleter(new KothTokenTabCompleter());
+            // Register the tab completer for the /pyrextoken command
+            getCommand("pyrextoken").setTabCompleter(new PyrexTokenTabCompleter());
 
             // Check if PlaceholderAPI is available and register placeholders
             Plugin placeholderAPI = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
             if (placeholderAPI != null) {
                 getLogger().info("PlaceholderAPI found, registering placeholders.");
-                new KothTokenExpansion(this).register();  // Registering the placeholder expansion here
+                new PyrexTokenExpansion(this).register();  // Registering the placeholder expansion here
             } else {
                 getLogger().warning("PlaceholderAPI not found, some features may not work.");
             }
             getLogger().info("\u001B[37m==========================================");
-            getLogger().info("\u001B[32mKothToken plugin successfully loaded!");
+            getLogger().info("\u001B[32mPyrexToken plugin successfully loaded!");
             getLogger().info("\u001B[37m==========================================");
         } catch (Exception e) {
             getLogger().severe("\u001B[37m==========================================");
-            getLogger().severe("\u001B[31mError loading KothToken plugin!");
+            getLogger().severe("\u001B[31mError loading PyrexToken plugin!");
             getLogger().severe(e.getMessage());
             getLogger().severe("\u001B[37m==========================================");
         }

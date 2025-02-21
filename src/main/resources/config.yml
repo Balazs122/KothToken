@@ -3,7 +3,7 @@ storage_mode: file  # or 'mysql' based on your choice
 mysql:
   host: localhost
   port: 3306
-  database: koth_tokens
+  database: pyrex_tokens
   username: your_mysql_username
   password: your_mysql_password
 
