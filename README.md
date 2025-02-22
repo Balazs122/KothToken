@@ -1,4 +1,4 @@
-![image](https://media.discordapp.net/attachments/1206908041912385536/1342540586120515735/PyrexTokenRebrand.png?ex=67ba01da&is=67b8b05a&hm=e95dce6a68c764df8736a20021d9b2fbefee77a2576dc3ffe705587bafedbf4b&=&format=webp&quality=lossless&width=1920&height=394)
+![https://www.spigotmc.org/resources/pyrextoken.122685/](https://media.discordapp.net/attachments/1206908041912385536/1342540586120515735/PyrexTokenRebrand.png?ex=67ba01da&is=67b8b05a&hm=e95dce6a68c764df8736a20021d9b2fbefee77a2576dc3ffe705587bafedbf4b&=&format=webp&quality=lossless&width=1920&height=394)
 
 # PyrexToken 🔥  
 A **fully open-source** and **free** Minecraft plugin that introduces a **token-based currency system**, perfect for in-game shops, rewards, and events.  
